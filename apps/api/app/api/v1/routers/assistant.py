@@ -188,6 +188,7 @@ def build_workflow(db: Session, settings: Settings) -> FacilityWorkflow:
             llm,
             model=settings.generator_model,
             timeout_seconds=settings.agent_timeout_seconds,
+            tools=tools,
             reasoning_effort=settings.reasoning_effort_for("response"),
             system_prompt=prompt_repo.get_active_prompt("response"),
         ),

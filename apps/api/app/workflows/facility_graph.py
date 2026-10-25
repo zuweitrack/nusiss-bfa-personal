@@ -189,6 +189,8 @@ class FacilityWorkflow:
         self.output_validator = output_validator or OutputPolicyValidator()
         self.injection_detector = PromptInjectionDetector()
         self.tools = tools
+        if self.tools and getattr(self.response, "tools", None) is None:
+            self.response.tools = self.tools
         self.tracer = tracer or LangfuseTracer(settings=settings)
 
     def _check_bounds(self, state: WorkflowState, *, model_call: bool = False) -> None:
